@@ -1,0 +1,11 @@
+fastapi==0.112.0
+fastapi-cli==0.0.5
+uvicorn==0.30.5
+pydantic==2.8.2
+transformers==4.44.0
+torch==2.4.0
+h5py==3.11.0
+tensorflow==2.17.0
+bitsandbytes==0.43.3
+accelerate==0.33.0
+PyYAML==6.0.2

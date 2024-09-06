@@ -1,0 +1,9 @@
+model:
+  repo_id: "core-outline/gemma-2b-instruct"
+  torch_dtype: "bfloat16"
+  max_new_tokens: 500
+  temperature: 0.8
+  quantize: #wont be read if the repo id has 4bit or 8bit in the title.
+    enable: true
+    type: "4bit" #"4bit" or "8bit"
+

@@ -1,0 +1,20 @@
+services:
+  fastapi-app:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    #image name you want to set.
+    image: poytoy/serve_api:local
+    #port_you_want_to_interact:internal_port
+    ports:
+      - "1420:1420"
+    #this is required for the gpu to be accesed.
+    runtime: nvidia
+    volumes:
+    #where your models are and where you want to put them in container
+      - ~/.cache/huggingface/hub:/root/.cache/huggingface/hub
+    #where your config file is:where you shoul to put them in container  
+      - ./config.yaml:/app/config.yaml
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility

@@ -1,0 +1,31 @@
+# Use nvidia cuda base image to utilize gpu's
+FROM nvidia/cuda:11.7.1-base-ubuntu22.04
+# Install system dependencies and wget
+RUN apt-get update && \
+    apt-get install -y \
+    python3-pip \
+    python3-dev \
+    build-essential \
+    libffi-dev \
+    libhdf5-dev \
+    wget \
+    gnupg \
+    && rm -rf /var/lib/apt/lists/*
+# Install Python packages
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt
+
+# Copy your application code
+COPY . /app
+
+WORKDIR /app
+
+
+# Expose the port that the application will run on
+EXPOSE 1420
+
+# Define the entry point for the container
+CMD ["uvicorn", "serve_api:app", "--host", "0.0.0.0", "--port", "1420"]
+
+##while calling docker make sure to map 1609 port to 1598
+#docker run -p 1609:1598 serve_api.py
